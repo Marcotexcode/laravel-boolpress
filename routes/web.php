@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
 
-    return view('guest.welcome');
+Route::get('/home', function () {
+
+    return view('admin.home');
     
 });
 
-// Route::get('/', 'HomeController@index')->name('homepage');
+Route::get('/', 'HomeController@index')->name('homepage');
 
 
 Auth::routes();
@@ -28,5 +29,6 @@ Auth::routes();
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 
     Route::get('/', 'HomeController@index')->name('index');
+    Route::resource('/posts', 'PostController');
 
 });
