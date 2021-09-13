@@ -81,7 +81,7 @@
                 <a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="{{ route('admin.posts.create') }}">Creare post</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link disabled">Disabled</a>

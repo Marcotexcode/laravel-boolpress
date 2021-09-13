@@ -4,28 +4,23 @@
 
     <div class="container">
 
-        <form>
-       
+        <form action="{{ route('admin.posts.store') }}" method="post" >
+             
+            @csrf
+
             <div class="mb-3">
        
                 <label for="titolo" class="form-label">Titolo</label>
        
-                <input type="text" class="form-control" id="titolo" name="title ">
+                <input type="text" class="form-control" id="titolo" name="title">
        
             </div>
        
             <div class="mb-3">
        
                 <label for="desc" class="form-label">Descrizione</label>
-       
-       
-            </div>
-       
-            <div class="mb-3 form-check">
-       
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-       
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                
+                <textarea class="form-control" name="content" id="desc" cols="30" rows="10"></textarea>
        
             </div>
        
