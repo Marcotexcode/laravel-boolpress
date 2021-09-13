@@ -19,6 +19,9 @@ Route::get('/', function () {
     
 });
 
+// Route::get('/', 'HomeController@index')->name('homepage');
+
+
 Auth::routes();
 
 
