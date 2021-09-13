@@ -72,6 +72,23 @@
             </div>
         </nav>
 
+        @auth
+            <ul class="nav">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+        @endauth
+
         <main class="py-4">
             @yield('content')
         </main>
