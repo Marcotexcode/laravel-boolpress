@@ -47,7 +47,26 @@ class PostController extends Controller
 
         //creare nuova instanza 
         $new_post = new Post();
-        $new_post->slug = Str::slug($data['title'], '-');
+
+        $slug = Str::slug($data['title'], '-');
+
+        $slug_base = $slug;
+
+        $slug_presente = Post::where('slug', $slug)->first();
+
+        $variabile_contatore = 1;
+
+        while ($slug_presente) {
+
+            $slug = $slug_base . '-' . $variabile_contatore;
+
+            $slug_presente = Post::where('slug', $slug)->first();
+
+            $variabile_contatore++;
+            
+        } 
+
+        $new_post->slug = $slug;
         
         $new_post->fill($data);
 
@@ -128,8 +147,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')->with('updated', 'Hai cancellato l\' elemento ' . $post->id);;
+        
     }
 }
