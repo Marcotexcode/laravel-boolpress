@@ -74,9 +74,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post )
     {
-        //
+
+        return view('admin.posts.edit', compact('post'));
+
     }
 
     /**
@@ -86,9 +88,38 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+
+        if ($data['title'] != $post->title) {
+
+            $slug = Str::slug($data['title'], '-');
+
+            $slug_base = $slug;
+
+            $slug_presente = Post::where('slug', $slug)->first();
+
+            $variabile_contatore = 1;
+
+            while ($slug_presente) {
+
+                $slug = $slug_base . '-' . $variabile_contatore;
+
+                $slug_presente = Post::where('slug', $slug)->first();
+
+                $variabile_contatore++;
+                
+            }
+            
+            $data['slug'] = $slug;
+
+        }
+        
+        $post->update($data);
+
+        return redirect()->route('admin.posts.index')->with('updated', 'Hai modificato l\' elemento ' . $post->id);
+
     }
 
     /**
