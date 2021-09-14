@@ -4,6 +4,24 @@
 
     <div class="container">
 
+        @if ($errors->any())
+
+            <div class="alert alert-danger">
+
+                <ul>
+
+                    @foreach ($errors->all() as $error)
+
+                        <li> {{$error}} </li>
+
+                    @endforeach
+
+                </ul>  
+
+            </div>
+
+        @endif
+            
         <form action=" {{ route('admin.posts.update', $post->id) }} " method="post" >
 
             @csrf
@@ -14,7 +32,7 @@
     
                 <label for="titolo" class="form-label">Titolo</label>
     
-                <input name="title" type="text" class="form-control" id="titolo" value=" {{ $post->title }} ">
+                <input name="title" type="text" class="form-control" id="titolo" value=" {{ old('title', $post->title) }} ">
         
             </div>
         
@@ -22,7 +40,7 @@
         
                 <label for="desc" class="form-label">Descrizione</label>
         
-                <textarea name="content" id="desc" cols="30" rows="10" class="form-control">{{ $post->content }}</textarea>
+                <textarea name="content" id="desc" cols="30" rows="10" class="form-control">{{ old('content', $post->content) }}</textarea>
 
             </div>
         
